@@ -1,7 +1,5 @@
 #! /bin/sh
 
-set -e
-
 if [ $# -ne 1 ]
 then
     echo "The TRAVIS_REPO_SLUG env variable was not set as input!"
