@@ -21,8 +21,6 @@ echo "Attempting to build $project for Windows"
 echo "Logs from Windows build:"
 cat $(pwd)/unity.log
 
-truncate -s 0 $(pwd)/unity.log
-
 echo "Attempting to build $project for OS X"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
@@ -36,8 +34,6 @@ echo "Attempting to build $project for OS X"
 echo "Logs from OS X build:"
 cat $(pwd)/unity.log
 
-truncate -s 0 $(pwd)/unity.log
-
 echo "Attempting to build $project for Linux"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
@@ -50,5 +46,3 @@ echo "Attempting to build $project for Linux"
 
 echo "Logs from Linux build :"
 cat $(pwd)/unity.log
-
-truncate -s 0 $(pwd)/unity.log
