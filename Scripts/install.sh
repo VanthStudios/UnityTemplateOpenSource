@@ -1,7 +1,5 @@
 #! /bin/sh
 
-set -e
-
 BASE_URL=http://netstorage.unity3d.com/unity
 HASH=649f48bbbf0f
 VERSION=5.4.1f1
