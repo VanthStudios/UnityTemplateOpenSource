@@ -20,6 +20,11 @@ echo "Attempting to build $project for Windows"
   -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" \
   -quit
 
+echo "Logs from Windows build:"
+cat $(pwd)/unity.log
+
+truncate -s 0 $(pwd)/unity.log
+
 echo "Attempting to build $project for OS X"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
@@ -29,6 +34,11 @@ echo "Attempting to build $project for OS X"
   -projectPath $(pwd) \
   -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" \
   -quit
+
+echo "Logs from OS X build:"
+cat $(pwd)/unity.log
+
+truncate -s 0 $(pwd)/unity.log
 
 echo "Attempting to build $project for Linux"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
@@ -40,5 +50,7 @@ echo "Attempting to build $project for Linux"
   -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project" \
   -quit
 
-echo 'Logs from build:'
+echo "Logs from Linux build :"
 cat $(pwd)/unity.log
+
+truncate -s 0 $(pwd)/unity.log
