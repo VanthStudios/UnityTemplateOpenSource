@@ -1,15 +1,12 @@
 language: generic
-
 os: osx
-
 install:
- # Install Unity and building tools for specific platforms
- - ./Scripts/install.sh
+- "./Scripts/install.sh"
 script:
- # Build the  project
- - ./Scripts/build.sh $TRAVIS_REPO_SLUG
-
+- "./Scripts/build.sh $TRAVIS_REPO_SLUG"
 notifications:
- email:
-  on_success: never
-  on_failure: always
+  email:
+    on_success: never
+    on_failure: always
+  slack:
+    secure: FakkQKJX3SRU+pHQ6eEfX0ZNB0iYwxNEbMJVb0/ySLZyMjF1uGwqgctKaToo7076KQla82gJS52lUySMm+SgHBdPEHfcJXDGtA5KW6aICedcaN6gxwJQ/cb8Y3bxBNCbqxSwqrcYIwz9R9lh9H9bwI6B5/+h8PvLqGliB7DhThjNkWCJWAOTMv3a30l262HJoKPpvU2YxLnwdVo0fxN1ya7vj8iVQuKl8RpHBi/uT+moS9iWygOrOukGYcRZhYLzNOFePYrMmDJ4H8aco1doScojipb17ukPZJ+oZswbDwfORLfnEBxzqnZ00b9NF1Jl3U53wwo7Uf7imY0fszmQRF6PsobQ+d8+eozzyF5eBJgwIEhPemj5ISO4KGpRH0Ky3EnWazciFew44nCxZycIxh1KmX/N5J8vPBRjLZVg7htBJpO89jDX3DPdfInj69asD2y2/WaBCeV0D3/YZHmixULKHrK/Q6SORnr6xrDqPQA4Y0ruSsJzBc4NZE1dNOU3N4J17eGy25c7NyNhQcxHM5LZw8w33w2z0qy3JrUh4D9wOTllVaboGA6fECmhyG/RAk+irQvw7qSf7P23aA0WwP/o2qaVPChbgSzw+EeMtUAuakw+Xko3xCRL3ywQR16rIe21rv3EAPwmh8FJqjJUpikM0pA2/S74nTEXgoJ8yYY=
