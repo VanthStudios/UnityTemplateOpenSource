@@ -1,7 +1,5 @@
-language: objective-c
-osx_image: xcode8.1
-rvm:
- - 2.2
+language: generic
+os: osx
 install:
  - ./Scripts/install.sh
 script:
