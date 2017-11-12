@@ -1,5 +1,19 @@
 #! /bin/sh
 
+checkBuildStatus() {
+    exitCode = $1
+    platform = $2
+    logPath = $3
+
+    if [ exitCode -ne 0 ]
+    then
+	echo "ERROR: Exit during the build for the $platform platform with code $exitCode. " \
+	     "Log output:"
+	cat logPath
+	return exitCode
+    fi
+}
+
 if [ $# -ne 1 ]
 then
     echo "The TRAVIS_REPO_SLUG env variable was not set as input!"
@@ -18,8 +32,11 @@ echo "Attempting to build $project for Windows"
   -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" \
   -quit
 
-echo "Logs from Windows build:"
-cat $(pwd)/unity.log
+exitCode = checkBuildStatus $? "Windows" $(pwd)/unity.log
+if [ exitCode -ne 0 ]
+then
+    return exitCode
+fi
 
 echo "Attempting to build $project for OS X"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
@@ -31,8 +48,11 @@ echo "Attempting to build $project for OS X"
   -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" \
   -quit
 
-echo "Logs from OS X build:"
-cat $(pwd)/unity.log
+exitCode = checkBuildStatus $? "OS X Universal" $(pwd)/unity.log
+if [ exitCode -ne 0 ]
+then
+    return exitCode
+fi
 
 echo "Attempting to build $project for Linux"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
@@ -44,5 +64,8 @@ echo "Attempting to build $project for Linux"
   -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project" \
   -quit
 
-echo "Logs from Linux build :"
-cat $(pwd)/unity.log
+exitCode = checkBuildStatus $? "Linux Universal" $(pwd)/unity.log
+if [ exitCode -ne 0 ]
+then
+    return exitCode
+fi
