@@ -1,6 +1,15 @@
 language: generic
+
 os: osx
+
 install:
+ # Install Unity and building tools for specific platforms
  - ./Scripts/install.sh
 script:
+ # Build the  project
  - ./Scripts/build.sh $TRAVIS_REPO_SLUG
+
+notifications:
+ email:
+  on_success: never
+  on_failure: always
