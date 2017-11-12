@@ -10,8 +10,9 @@ checkBuildStatus() {
 	echo "ERROR: Exit during the build for the $platform platform with code $exitCode. " \
 	     "Log output:"
 	cat $logPath
-	return $exitCode
     fi
+
+    return $exitCode
 }
 
 if [ $# -ne 1 ]
