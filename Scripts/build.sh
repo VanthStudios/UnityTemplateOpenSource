@@ -1,9 +1,9 @@
 #! /bin/sh
 
 checkBuildStatus() {
-    exitCode = $1
-    platform = $2
-    logPath = $3
+    local exitCode=$1
+    local platform=$2
+    local logPath=$3
 
     if [ $exitCode -ne 0 ]
     then
@@ -32,7 +32,7 @@ echo "Attempting to build $project for Windows"
   -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" \
   -quit
 
-exitCode=checkBuildStatus $? "Windows" $(pwd)/unity.log
+exitCode=$(checkBuildStatus $? "Windows" $(pwd)/unity.log)
 if [ $exitCode -ne 0 ]
 then
     return $exitCode
@@ -48,7 +48,8 @@ echo "Attempting to build $project for OS X"
   -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" \
   -quit
 
-exitCode=checkBuildStatus $? "OS X Universal" $(pwd)/unity.log
+exitCode=$(checkBuildStatus $? "OS X Universal" $(pwd)/unity.log)
+
 if [ $exitCode -ne 0 ]
 then
     return $exitCode
@@ -64,7 +65,7 @@ echo "Attempting to build $project for Linux"
   -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project" \
   -quit
 
-exitCode=checkBuildStatus $? "Linux Universal" $(pwd)/unity.log
+exitCode=$(checkBuildStatus $? "Linux Universal" $(pwd)/unity.log)
 if [ $exitCode -ne 0 ]
 then
     return $exitCode
