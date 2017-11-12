@@ -32,10 +32,9 @@ echo "Attempting to build $project for Windows"
   -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" \
   -quit
 
-exitCode=$(checkBuildStatus $? "Windows" $(pwd)/unity.log)
-if [ $exitCode -ne 0 ]
+if [ $(checkBuildStatus $? "Windows" $(pwd)/unity.log) -ne 0 ]
 then
-    return $exitCode
+    exit 1
 fi
 
 echo "Attempting to build $project for OS X"
@@ -48,11 +47,9 @@ echo "Attempting to build $project for OS X"
   -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" \
   -quit
 
-exitCode=$(checkBuildStatus $? "OS X Universal" $(pwd)/unity.log)
-
-if [ $exitCode -ne 0 ]
+if [ $(checkBuildStatus $? "OS X Universal" $(pwd)/unity.log) -ne 0 ]
 then
-    return $exitCode
+    exit 1
 fi
 
 echo "Attempting to build $project for Linux"
@@ -65,8 +62,7 @@ echo "Attempting to build $project for Linux"
   -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project" \
   -quit
 
-exitCode=$(checkBuildStatus $? "Linux Universal" $(pwd)/unity.log)
-if [ $exitCode -ne 0 ]
+if [ $(checkBuildStatus $? "Linux Universal" $(pwd)/unity.log) -ne 0 ]
 then
-    return $exitCode
+    exit 1
 fi
