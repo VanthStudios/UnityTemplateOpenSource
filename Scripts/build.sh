@@ -10,9 +10,8 @@ checkBuildStatus() {
 	echo "ERROR: Exit during the build for the $platform platform with code $exitCode. " \
 	     "Log output:"
 	cat $logPath
+	exit $exitCode
     fi
-
-    return $exitCode
 }
 
 if [ $# -ne 1 ]
@@ -34,10 +33,6 @@ echo "Attempting to build $project for Windows"
   -quit
 
 checkBuildStatus $? "Windows" $(pwd)/unity.log
-if [ $? -ne 0 ]
-then
-    exit 1
-fi
 
 echo "Attempting to build $project for OS X"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
@@ -50,10 +45,6 @@ echo "Attempting to build $project for OS X"
   -quit
 
 checkBuildStatus $? "OS X Universal" $(pwd)/unity.log
-if [ $? -ne 0 ]
-then
-    exit 1
-fi
 
 echo "Attempting to build $project for Linux"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
@@ -66,7 +57,3 @@ echo "Attempting to build $project for Linux"
   -quit
 
 checkBuildStatus $? "Linux Universal" $(pwd)/unity.log
-if [ $? -ne 0 ]
-then
-    exit 1
-fi
