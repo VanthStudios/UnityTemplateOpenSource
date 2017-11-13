@@ -1,9 +1,29 @@
 language: generic
 os: osx
+
 install:
 - make install
+
 script:
 - make
+
+before_deploy:
+- make zip
+- git fetch --tags
+
+deploy:
+  provider: releases
+  api_key:
+    secure: NNUYr6hAtG8dZay/R1/yYll9sCjcrW+DR9wWHK8IZTztKJgdfXREub/dSuzNtN5aZbsUL3wlePpRHTZSpCDWfJTPBrKQFK1WwhDK4hu8V5301frcIqO3ChhqgzbWuZ8UGhMHt1dc2m6j9aE5ViDbz1EqqYBDm4xESMfc/u0lj3Jf2i+OHy5TSujanFj3XJIoSCMgGZjnTbg+vX6YrF8cqb7fX2VFoZ5cBPN8PfnIMFSOmmOw7ATvyD7+Gmizcv/thH3PZOomDsf7rVDE68tgerfbf/MwmqFcoF0YN3XmfHSVAQXL2HwvUQ2v5ny/tOJDGIfSP5QXT71mM8969wa6EqMP2fgjMEEwR6ikXhwb3Gpq/6KEeHnUzbnZ/ytrAqLWsIEJvaJAno1jMxByLCe/cdOx5ueyi8UQNbxRhBc7c816PZvaABVzA5qOTk2V3dtutY7qqNVySxg98XK+LEaBcSIbrqL4ALDkxioPLw+LGlLzsE3HPxhDgOC4P6vjJ/KnfrjhaoDO1byi1DmHXbPj3ABJMVALeitRG+v4AUnsZmx/IMM4fHBA+PBA5hpIVso7LZQAc3drl+bA4yTAoIczPgWcNwjZvyA366UBBNI0bqIibvW7gVHXRuxfgS6mQNeUBSUI7khe82PCkpFB+nBxmdoK/JMgHWeKfwGK81Lcw3E=
+  file:
+    - linux_u.zip
+    - osx_u.x
+    - windows.zip
+  skip_cleanup: true
+  on:
+    repo: VanthStudios/UnityTemplateOpenSource
+    tags: true
+
 notifications:
   email:
     on_success: never
