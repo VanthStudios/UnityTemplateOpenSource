@@ -2,10 +2,10 @@ language: generic
 os: osx
 
 install:
-- make install
+- make install -s
 
 script:
-- make
+- make -s
 
 before_deploy:
 - make zip
