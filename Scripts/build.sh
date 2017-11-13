@@ -1,5 +1,13 @@
 #! /bin/sh
 
+# The scope of the script is running the build for the three major
+# platform: Windows, Linux, OS X.
+# Paramas: require to pass the env variable TRAVIS_REPO_SLUG so to get
+# the name of the project and use it to name the executable file.
+# Returns: if all steps are done successfully, then in the directory
+# Build will be put a directory for each platform with inside the
+# relative build. 
+
 checkBuildStatus() {
     local exitCode=$1
     local platform=$2
@@ -7,11 +15,13 @@ checkBuildStatus() {
 
     if [ $exitCode -ne 0 ]
     then
-	echo "ERROR: Exit during the build for the $platform platform with code $exitCode. " \
+	echo "$platform: exit during the build with code $exitCode. " \
 	     "Log output:"
 	cat $logPath
 	exit $exitCode
     fi
+
+    echo "$platform: done!"
 }
 
 if [ $# -ne 1 ]
@@ -34,7 +44,7 @@ echo "Attempting to build $project for Windows"
 
 checkBuildStatus $? "Windows" $(pwd)/unity.log
 
-echo "Attempting to build $project for OS X"
+echo "Attempting to build $project for OS X Universal"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
@@ -46,7 +56,7 @@ echo "Attempting to build $project for OS X"
 
 checkBuildStatus $? "OS X Universal" $(pwd)/unity.log
 
-echo "Attempting to build $project for Linux"
+echo "Attempting to build $project for Linux Universal"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
@@ -57,3 +67,10 @@ echo "Attempting to build $project for Linux"
   -quit
 
 checkBuildStatus $? "Linux Universal" $(pwd)/unity.log
+
+echo "Attempting to zip builds"
+zip -r $(pwd)/Build/linux.zip $(pwd)/Build/linux/
+zip -r $(pwd)/Build/osx.zip $(pwd)/Build/osx/
+zip -r $(pwd)/Build/windows.zip $(pwd)/Build/windows/
+
+echo "Done!"
