@@ -38,7 +38,7 @@ osx:
 		-logFile $(LOG_PATH) \
 		-projectPath `pwd` \
 		-buildOSXUniversalPlayer "`pwd`/Build/osx/$(PROJECT).app" \
-		-quit \
+		-quit
 	if [ $$? -ne 0 ]; then \
 		echo "OS X Universal: exit during the build with code $$?"; \
 		cat $(LOG_PATH); \
