@@ -73,7 +73,7 @@ windows:
 		-silent-crashes \
 		-logFile $(LOG_PATH) \
 		-projectPath `pwd` \
-		-buildLinuxUniversalPlayer "`pwd`/Build/linux/$(PROJECT).exe" \
+		-buildWindowsPlayer "`pwd`/Build/windows/$(PROJECT).exe" \
 		-quit
 	if [ $$? -ne 0 ]; then \
 		echo "Windows: exit during the build with code $$?"; \
@@ -81,3 +81,11 @@ windows:
 		exit 1; \
 	fi; \
 	echo "Windows: done!";
+
+zip:
+	set -e
+	echo "Attempting to zip builds"
+	zip -r linux_u.zip `pwd`/Build/linux/
+	zip -r osx_u.zip `pwd`/Build/osx/
+	zip -r windows.zip `pwd`/Build/windows/
+	echo "All zip are ready for the deploy!"
