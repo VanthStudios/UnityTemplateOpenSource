@@ -3,8 +3,8 @@
 # - TRAVIS_REPO_SLUG
 
 BASE_URL= http://netstorage.unity3d.com/unity
-HASH= 46dda1414e51
-VERSION= 2017.2.0f3
+HASH= a9f86dcd79df
+VERSION= 2017.3.0f3
 
 PACKAGE= \
 	"MacEditorInstaller/Unity-$(VERSION).pkg" \
