@@ -21,7 +21,6 @@ deploy:
     - windows.zip
   skip_cleanup: true
   on:
-    repo: VanthStudios/UnityTemplateOpenSource
     tags: true
 
 notifications:

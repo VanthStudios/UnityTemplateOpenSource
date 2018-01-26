@@ -1,10 +1,9 @@
 # This Makefile is thinked to run over Travis CI so the following variables
 # must be guarantee:
 # - TRAVIS_REPO_SLUG
-
-BASE_URL= http://netstorage.unity3d.com/unity
-HASH= a9f86dcd79df
-VERSION= 2017.3.0f3
+# - BASE_URL - the remote store to download an Unity Editor version
+# - HASH - the specific Unity version's hash
+# - VERSION - the wanted Unity version
 
 PACKAGE= \
 	"MacEditorInstaller/Unity-$(VERSION).pkg" \
